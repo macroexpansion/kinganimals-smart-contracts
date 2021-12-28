@@ -27,14 +27,21 @@ contract UserInfo {
         string uri;
     }
 
-    function getUserNFT(address _address) external view returns (TokenInfo[] memory) {
+    function getUserNFT(address _address)
+        external
+        view
+        returns (TokenInfo[] memory)
+    {
         uint256 balance = nft.balanceOf(_address);
 
         TokenInfo[] memory tokens = new TokenInfo[](balance);
         for (uint256 i = 0; i < balance; i++) {
-            uint256 tokenId = ERC721Enumerable(address(nft)).tokenOfOwnerByIndex(_address, i);
+            uint256 tokenId = ERC721Enumerable(address(nft))
+                .tokenOfOwnerByIndex(_address, i);
             uint256 itemId = INFT(address(nft)).getNftInfo(tokenId);
-            string memory uri = ERC721URIStorage(address(nft)).tokenURI(tokenId);
+            string memory uri = ERC721URIStorage(address(nft)).tokenURI(
+                tokenId
+            );
 
             tokens[i] = TokenInfo(tokenId, itemId, address(nft), uri);
         }

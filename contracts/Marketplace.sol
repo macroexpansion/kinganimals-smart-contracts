@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
+import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/utils/math/SafeMath.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import '@openzeppelin/contracts/utils/Counters.sol';
@@ -232,10 +232,7 @@ contract Marketplace is Ownable, IERC721Receiver {
         );
     }
 
-    function cancelSale(uint256 saleId)
-        external
-        onlySeller(saleId)
-    {
+    function cancelSale(uint256 saleId) external onlySeller(saleId) {
         Sale storage sale = salesById[saleId];
         require(sale.isActive, 'cancelSale: Sale was ended.');
 

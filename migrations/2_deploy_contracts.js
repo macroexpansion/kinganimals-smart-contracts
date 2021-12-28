@@ -1,5 +1,5 @@
-// var MyContract = artifacts.require("./MyContract.sol");
+const Test = artifacts.require('./Test.sol')
 
-module.exports = function(deployer) {
-  // deployer.deploy(MyContract);
-};
+module.exports = async deployer => {
+    await deployer.deploy(Test, 5)
+}

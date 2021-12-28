@@ -9,7 +9,6 @@ import '@openzeppelin/contracts/token/ERC721/IERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol';
 import '@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol';
 
-
 contract GameMaster is AccessControl {
     using SafeMath for uint256;
 
@@ -65,4 +64,3 @@ contract GameMaster is AccessControl {
 
     event GameStarted(uint256 gameid, address[] players, bool isActive);
 }
-

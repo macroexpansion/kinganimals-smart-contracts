@@ -7,19 +7,20 @@
     "scripts": {
         "format:sol": "prettier --write **/*.sol",
         "format:js": "prettier --write **/*.js",
-        "hardhat:run": "hardhat run",
-        "compile": "hardhat compile"
+        "test": "mocha"
     },
     "devDependencies": {
-        "prettier": "^2.4.1",
+        "prettier": "^2.5.1",
         "prettier-plugin-solidity": "^1.0.0-beta.19"
     },
     "dependencies": {
         "@openzeppelin/contracts": "^4.3.1",
-        "@openzeppelin/hardhat-upgrades": "^1.10.0",
         "@openzeppelin/contracts-upgradeable": "^4.3.2",
+        "@openzeppelin/hardhat-upgrades": "^1.10.0",
+        "chai": "^4.3.4",
         "dotenv": "^10.0.0",
-        "keccak256": "^1.0.3"
+        "keccak256": "^1.0.3",
+        "mocha": "^9.1.3",
+        "tronweb": "^4.0.1"
     }
 }
-

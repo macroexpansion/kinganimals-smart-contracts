@@ -89,7 +89,11 @@ contract NFT is
         itemById[tokenId] = Item(itemId);
     }
 
-    function _mint(address user, string memory uri, uint256 itemId) internal {
+    function _mint(
+        address user,
+        string memory uri,
+        uint256 itemId
+    ) internal {
         _tokenIdCounter.increment();
         uint256 newTokenId = _tokenIdCounter.current();
 
@@ -98,12 +102,18 @@ contract NFT is
         _setTokenURI(newTokenId, uri);
     }
 
-    function mint(address user, string memory uri, uint256 itemId) external onlyRole(MINTER_ROLE) {
+    function mint(
+        address user,
+        string memory uri,
+        uint256 itemId
+    ) external onlyRole(MINTER_ROLE) {
         _mint(user, uri, itemId);
     }
 
-    function setTokenURI(uint256 tokenId, string memory uri) external onlyRole(MINTER_ROLE) {
+    function setTokenURI(uint256 tokenId, string memory uri)
+        external
+        onlyRole(MINTER_ROLE)
+    {
         _setTokenURI(tokenId, uri);
     }
 }
-
