@@ -1,0 +1,25 @@
+{
+    "name": "kinganimals-smart-contracts",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "format:sol": "prettier --write **/*.sol",
+        "format:js": "prettier --write **/*.js",
+        "hardhat:run": "hardhat run",
+        "compile": "hardhat compile"
+    },
+    "devDependencies": {
+        "prettier": "^2.4.1",
+        "prettier-plugin-solidity": "^1.0.0-beta.19"
+    },
+    "dependencies": {
+        "@openzeppelin/contracts": "^4.3.1",
+        "@openzeppelin/hardhat-upgrades": "^1.10.0",
+        "@openzeppelin/contracts-upgradeable": "^4.3.2",
+        "dotenv": "^10.0.0",
+        "keccak256": "^1.0.3"
+    }
+}
+
