@@ -23,7 +23,7 @@ contract NFT is
     bytes32 public constant MINTER_ROLE = keccak256('MINTER_ROLE');
     Counters.Counter public _tokenIdCounter;
 
-    constructor() ERC721('KingAnimals', 'KANM') {
+    constructor() ERC721('KingAnimals', 'KING') {
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _setupRole(PAUSER_ROLE, msg.sender);
         _setupRole(MINTER_ROLE, msg.sender);
@@ -85,7 +85,7 @@ contract NFT is
         return itemById[tokenId].itemId;
     }
 
-    function _setNFT(uint256 tokenId, uint256 itemId) internal {
+    function _setItemId(uint256 tokenId, uint256 itemId) internal {
         itemById[tokenId] = Item(itemId);
     }
 
@@ -97,7 +97,7 @@ contract NFT is
         _tokenIdCounter.increment();
         uint256 newTokenId = _tokenIdCounter.current();
 
-        _setNFT(newTokenId, itemId);
+        _setItemId(newTokenId, itemId);
         _safeMint(user, newTokenId);
         _setTokenURI(newTokenId, uri);
     }
@@ -115,5 +115,12 @@ contract NFT is
         onlyRole(MINTER_ROLE)
     {
         _setTokenURI(tokenId, uri);
+    }
+
+    function setItemId(uint256 tokenId, uint256 itemId)
+        external
+        onlyRole(MINTER_ROLE)
+    {
+        _setItemId(tokenId, itemId);
     }
 }
