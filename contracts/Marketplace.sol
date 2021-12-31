@@ -67,7 +67,7 @@ contract Marketplace is Ownable, IERC721Receiver {
         uint256 lastUpdated;
     }
 
-    mapping(uint256 => Sale) private salesById;
+    mapping (uint256 => Sale) public salesById;
 
     event SaleCreated(
         uint256 indexed saleId,
@@ -253,83 +253,126 @@ contract Marketplace is Ownable, IERC721Receiver {
     function getActiveSalesByPage(uint256 page, uint256 size)
         external
         view
-        returns (Sale[] memory)
+        returns (
+            uint256[] memory saleIds,
+            uint256[] memory tokenIds,
+            address[] memory sellers,
+            uint256[] memory prices,
+            uint256[] memory lastUpdateds
+        )
     {
         require(
             page >= 0 && size > 0,
             'getActiveSalesByPage: Page and size must be greater than 0'
         );
 
-        uint256 saleCount = _saleIds.current();
-        uint256 activeSaleCount = saleCount -
-            _saleInactive.current() -
-            _saleSold.current();
-        if (activeSaleCount < page * size) return new Sale[](0);
-
-        uint256 currentIndex = 0;
-        uint256 count = 0;
+        uint256 activeSaleCount = _saleIds.current() - _saleInactive.current() - _saleSold.current();
+        if (activeSaleCount < page * size) {
+            saleIds = new uint256[](0);
+            tokenIds = new uint256[](0);
+            sellers = new address[](0);
+            prices = new uint256[](0);
+            lastUpdateds = new uint256[](0);
+            return (saleIds, tokenIds, sellers, prices, lastUpdateds);
+        }
 
         uint256 saleSize = (page + 1) * size > activeSaleCount
             ? activeSaleCount - page * size
             : size;
-        Sale[] memory sales = new Sale[](saleSize);
-        for (uint256 i = 1; i <= saleCount; i++) {
+
+        saleIds = new uint256[](saleSize);
+        tokenIds = new uint256[](saleSize);
+        sellers = new address[](saleSize);
+        prices = new uint256[](saleSize);
+        lastUpdateds = new uint256[](saleSize);
+
+        uint256 currentIndex = 0;
+        uint256 count = 0;
+        for (uint256 i = 1; i <= _saleIds.current(); i++) {
             if (salesById[i].isActive) {
                 count++;
                 if (count > page * size) {
                     Sale storage sale = salesById[i];
-                    sales[currentIndex] = sale;
+
+                    saleIds[currentIndex] = sale.saleId;
+                    tokenIds[currentIndex] = sale.tokenId;
+                    sellers[currentIndex] = sale.seller;
+                    prices[currentIndex] = sale.price;
+                    lastUpdateds[currentIndex] = sale.lastUpdated;
+                    
                     if (currentIndex++ == size - 1) break;
                 }
             }
         }
 
-        return sales;
+        return (saleIds, tokenIds, sellers, prices, lastUpdateds);
     }
 
     /* Returns only sales that a user has purchased */
-    function getUserPurchasedSales() external view returns (Sale[] memory) {
-        uint256 saleCount = _saleIds.current();
-        uint256 count = 0;
-        uint256 currentIndex = 0;
+    // function getUserPurchasedSales() external view returns (Sale[] memory) {
+    //     uint256 saleCount = _saleIds.current();
+    //     uint256 count = 0;
+    //     uint256 currentIndex = 0;
 
-        for (uint256 i = 1; i <= saleCount; i++) {
-            if (salesById[i].buyer == msg.sender) {
-                count += 1;
-            }
-        }
+    //     for (uint256 i = 1; i <= saleCount; i++) {
+    //         if (salesById[i].buyer == msg.sender) {
+    //             count += 1;
+    //         }
+    //     }
 
-        Sale[] memory sales = new Sale[](count);
-        for (uint256 i = 1; i <= saleCount; i++) {
-            if (salesById[i].buyer == msg.sender) {
-                Sale storage sale = salesById[i];
-                sales[currentIndex++] = sale;
-            }
-        }
+    //     Sale[] memory sales = new Sale[](count);
+    //     for (uint256 i = 1; i <= saleCount; i++) {
+    //         if (salesById[i].buyer == msg.sender) {
+    //             Sale storage sale = salesById[i];
+    //             sales[currentIndex++] = sale;
+    //         }
+    //     }
 
-        return sales;
-    }
+    //     return sales;
+    // }
 
     /* Returns only sales that a user has created */
-    function getUserCreatedSales() external view returns (Sale[] memory) {
+    function getUserCreatedSales()
+        external
+        view
+        returns (
+            uint256[] memory saleIds,
+            uint256[] memory tokenIds,
+            address[] memory sellers,
+            uint256[] memory prices,
+            uint256[] memory lastUpdateds
+        )
+    {
         uint256 saleCount = _saleIds.current();
         uint256 count = 0;
-        uint256 currentIndex = 0;
 
         for (uint256 i = 1; i <= saleCount; i++) {
-            if (salesById[i].seller == msg.sender) {
+            if (salesById[i].seller == msg.sender && salesById[i].isActive) {
                 count += 1;
             }
         }
 
-        Sale[] memory sales = new Sale[](count);
+        saleIds = new uint256[](count);
+        tokenIds = new uint256[](count);
+        sellers = new address[](count);
+        prices = new uint256[](count);
+        lastUpdateds = new uint256[](count);
+
+        uint256 currentIndex = 0;
         for (uint256 i = 1; i <= saleCount; i++) {
             if (salesById[i].seller == msg.sender && salesById[i].isActive) {
                 Sale storage sale = salesById[i];
-                sales[currentIndex++] = sale;
+
+                saleIds[currentIndex] = sale.saleId;
+                tokenIds[currentIndex] = sale.tokenId;
+                sellers[currentIndex] = sale.seller;
+                prices[currentIndex] = sale.price;
+                lastUpdateds[currentIndex] = sale.lastUpdated;
+
+                if (currentIndex++ == count) break;
             }
         }
 
-        return sales;
+        return (saleIds, tokenIds, sellers, prices, lastUpdateds);
     }
 }

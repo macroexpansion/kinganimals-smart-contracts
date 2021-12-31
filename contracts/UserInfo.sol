@@ -17,35 +17,27 @@ contract UserInfo {
         nft = IERC721(erc721);
     }
 
-    /**
-     *  Token info
-     */
-    struct TokenInfo {
-        uint256 tokenId;
-        uint256 itemId;
-        address contractAddress;
-        string uri;
-    }
-
-    function getUserNFT(address _address)
+    function getUserNft(address _address)
         external
         view
-        returns (TokenInfo[] memory)
+        returns (uint256[] memory, uint256[] memory, string[] memory)
     {
         uint256 balance = nft.balanceOf(_address);
 
-        TokenInfo[] memory tokens = new TokenInfo[](balance);
-        for (uint256 i = 0; i < balance; i++) {
-            uint256 tokenId = ERC721Enumerable(address(nft))
-                .tokenOfOwnerByIndex(_address, i);
-            uint256 itemId = INFT(address(nft)).getNftInfo(tokenId);
-            string memory uri = ERC721URIStorage(address(nft)).tokenURI(
-                tokenId
-            );
+        uint256[] memory tokenIds = new uint256[](balance);
+        uint256[] memory itemIds = new uint256[](balance);
+        string[] memory uris = new string[](balance);
 
-            tokens[i] = TokenInfo(tokenId, itemId, address(nft), uri);
+        for (uint256 i = 0; i < balance; i++) {
+            uint256 tokenId = ERC721Enumerable(address(nft)).tokenOfOwnerByIndex(_address, i);
+            uint256 itemId = INFT(address(nft)).getNftInfo(tokenId);
+            string memory uri = ERC721URIStorage(address(nft)).tokenURI(tokenId);
+
+            tokenIds[i] = tokenId;
+            itemIds[i] = itemId;
+            uris[i] = uri;
         }
 
-        return tokens;
+        return (tokenIds, itemIds, uris);
     }
 }

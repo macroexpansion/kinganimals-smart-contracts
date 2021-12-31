@@ -11,7 +11,7 @@ describe('Token', () => {
     it.skip('mint token', async () => {
         const res = await this.instance.mint(
             'TK5oiWAK4wcuhjFJPxZDKeNHT9iPh3gsHA',
-            tronWeb.toSun('100000000')
+            tronWeb.toSun('1000')
         ).send({
             feeLimit: tronWeb.toSun('50'),
             shouldPollResponse: false
