@@ -13,5 +13,5 @@ describe('User Info', () => {
         const nfts = await this.instance.getUserNft('TK5oiWAK4wcuhjFJPxZDKeNHT9iPh3gsHA').call()
         const info = UserInfo(nfts)
         console.log(info)
-    })
+    }).timeout(20000)
 })

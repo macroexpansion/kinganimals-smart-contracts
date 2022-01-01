@@ -8,12 +8,12 @@ describe('NFT', () => {
         this.instance = await shasta().contract().at(nftAddress)
     })
 
-    it('get tokenId counter', async () => {
+    it.skip('get tokenId counter', async () => {
         const res = await this.instance._tokenIdCounter().call()
         console.log('token counter:', res._value.toNumber())
     })
 
-    it('mint a nft', async () => {
+    it.skip('mint a nft', async () => {
         const res = await this.instance.mint(
             'TK5oiWAK4wcuhjFJPxZDKeNHT9iPh3gsHA',
             'https://static.howlcity.io/bike/10.json',
@@ -29,7 +29,7 @@ describe('NFT', () => {
         console.log('balance:', balance.toNumber())
 
         for (let i = 1; i <= 2; i++) {
-            const info = await this.instance.getNftInfo(i).call()
+            const info = await this.instance.getNftInfo(/*tokenId*/i).call()
             console.log('itemId', info.toNumber())
         }
 

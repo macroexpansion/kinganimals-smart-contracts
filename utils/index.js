@@ -97,7 +97,7 @@ exports.nftApprove = async ({contract, targetAddress}) => {
 
     if (!isApprovedForAll) {
         const approve = await contract.setApprovalForAll(targetAddress, true).send({
-            feeLimit: tronWeb.toSun('100'),
+            feeLimit: TronWeb.toSun('100'),
             shouldPollResponse: false
         })
     }

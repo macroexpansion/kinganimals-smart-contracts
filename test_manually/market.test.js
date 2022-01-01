@@ -15,24 +15,29 @@ describe('Market', () => {
             targetAddress: marketAddress
         })
 
-        /* const sales = await this.Market.createSale(4, tronWeb.toSun('40000')).send({
+        const sales = await this.Market.createSale(/*tokenId*/5, /*price*/tronWeb.toSun('50000')).send({
             feeLimit: tronWeb.toSun('200')
-        }) */
+        })
     }).timeout(20000)
 
     it('get active sales', async () => {
-        const sales = await this.Market.getActiveSalesByPage(0, 10).call()
-        console.log(Sale(sales))
+        const page1 = await this.Market.getActiveSalesByPage(/*page*/0, /*num item per page*/2).call()
+        console.log(Sale(page1))
+
+        const page2 = await this.Market.getActiveSalesByPage(1, 2).call()
+        console.log(Sale(page2))
+
+        const page3 = await this.Market.getActiveSalesByPage(2, 2).call()
+        console.log(Sale(page3))
     })
 
-    // TODO: fix empty sale
-    it.skip('get user created sales', async () => {
+    it('get user created sales', async () => {
         const sales = await this.Market.getUserCreatedSales().call()
         console.log(Sale(sales))
     })
 
     it.skip('cancel sale', async () => {
-        const sales = await this.Market.cancelSale(4).send({
+        const sales = await this.Market.cancelSale(/*saleId*/1).send({
             feeLimit: tronWeb.toSun('100')
         })
     })
@@ -47,7 +52,7 @@ describe('Market', () => {
             amount: tronWeb.toSun(20000)
         })
 
-        const sales = await market.purchaseSale(2).send({
+        const sales = await market.purchaseSale(/*saleid*/2).send({
             feeLimit: tronWeb.toSun('200')
         })
     })
