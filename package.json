@@ -7,7 +7,8 @@
     "scripts": {
         "format:sol": "prettier --write **/*.sol",
         "format:js": "prettier --write **/*.js",
-        "test": "mocha"
+        "test": "mocha",
+        "task": "node tasks/index.js"
     },
     "devDependencies": {
         "prettier": "^2.5.1",

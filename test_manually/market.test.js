@@ -47,7 +47,7 @@ describe('Market', () => {
         const token = await shasta().contract().at(tokenAddress)
 
         await tokenApprove({
-            tokenContract: token,
+            contract: token,
             targetAddress: marketAddress,
             amount: tronWeb.toSun(20000)
         })

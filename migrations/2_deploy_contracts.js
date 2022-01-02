@@ -3,6 +3,7 @@ const NFT = artifacts.require('./NFT.sol')
 const Token = artifacts.require('./Token.sol')
 const Marketplace = artifacts.require('./Marketplace.sol')
 const UserInfo = artifacts.require('./UserInfo.sol')
+const Store = artifacts.require('./Store.sol')
 
 module.exports = async deployer => {
     // await deployer.deploy(Test, 5)
@@ -13,5 +14,6 @@ module.exports = async deployer => {
     console.log({tokenAddress, nftAddress})
 
     // await deployer.deploy(UserInfo, tokenAddress, nftAddress)
-    await deployer.deploy(Marketplace, tokenAddress, nftAddress)
+    // await deployer.deploy(Marketplace, tokenAddress, nftAddress)
+    await deployer.deploy(Store, tokenAddress, nftAddress)
 }
