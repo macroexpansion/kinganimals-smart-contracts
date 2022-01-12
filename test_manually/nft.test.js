@@ -13,9 +13,9 @@ describe('NFT', () => {
         console.log('token counter:', res._value.toNumber())
     })
 
-    it.skip('mint a nft', async () => {
+    it('mint a nft', async () => {
         const res = await this.instance.mint(
-            'TK5oiWAK4wcuhjFJPxZDKeNHT9iPh3gsHA',
+            'TD3T7xVMbZpc4HSKyiBF2m1eiwkucXXVxz',
             'https://static.howlcity.io/bike/10.json',
             10
         ).send({
@@ -24,7 +24,7 @@ describe('NFT', () => {
         })
     })
 
-    it('get nft info', async () => {
+    it.skip('get nft info', async () => {
         const balance = await this.instance.balanceOf('TK5oiWAK4wcuhjFJPxZDKeNHT9iPh3gsHA').call()
         console.log('balance:', balance.toNumber())
 
@@ -44,7 +44,7 @@ describe('NFT', () => {
         })
     })
 
-    it('check minter', async () => {
+    it.skip('check minter', async () => {
         const minter = await isMinter({
             contract: this.instance,
             address: 'TK5oiWAK4wcuhjFJPxZDKeNHT9iPh3gsHA'
