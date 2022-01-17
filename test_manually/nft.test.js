@@ -15,7 +15,7 @@ describe('NFT', () => {
 
     it('mint a nft', async () => {
         const res = await this.instance.mint(
-            'TD3T7xVMbZpc4HSKyiBF2m1eiwkucXXVxz',
+            'TZ5iGdvhNuZLi1aVgLXFffG5vSSaiDEt8j',
             'https://static.howlcity.io/bike/10.json',
             10
         ).send({

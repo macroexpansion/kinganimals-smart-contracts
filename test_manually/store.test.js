@@ -11,18 +11,18 @@ describe('Store', () => {
     })
 
     it('check price', async () => {
-        const price = await this.Store.price().call()
+        const price = await this.Store.prices(144).call()
         console.log('price', formatTrx(price))
     })
 
     it('check available quantity', async () => {
-        const quant1 = await this.Store.quantity(/*itemId=*/10).call() // quantity of item id 10
-        const quant2 = await this.Store.quantity(/*itemId=*/11).call() // quantity of item id 11
+        const quant1 = await this.Store.quantity(/*itemId=*/1).call() // quantity of item id 10
+        const quant2 = await this.Store.quantity(/*itemId=*/144).call() // quantity of item id 11
         console.log('quant1', quant1.toNumber())
         console.log('quant2', quant2.toNumber())
     }).timeout(20000)
 
-    it('buy', async () => {
+    it.skip('buy', async () => {
         await tokenApprove({
             contract: this.Token,
             targetAddress: storeAddress,
@@ -49,7 +49,7 @@ describe('Store', () => {
         }
     }).timeout(20000)
 
-    it('check nft', async () => {
+    it.skip('check nft', async () => {
         const res = await this.UserInfo.getUserNft(this.UserInfo.tronWeb.defaultAddress.base58).call()
         console.log(UserInfo(res))
     }).timeout(20000)

@@ -16,16 +16,15 @@ contract Store is Ownable {
     IERC20 public token;
     IERC721 public nft;
 
-    uint256 public price;
     address public dev;
     bool public isPaused;
     mapping (uint256 => uint256) public quantity;
+    mapping (uint256 => uint256) public prices;
 
     constructor(address erc20, address erc721) {
         token = IERC20(erc20);
         nft = IERC721(erc721);
 
-        price = uint256(1000).mul(1e6);
         dev = msg.sender;
 
         isPaused = false;
@@ -47,8 +46,12 @@ contract Store is Ownable {
         dev = newDev;
     }
 
-    function setPrice(uint256 newPrice) external onlyOwner {
-        price = newPrice;
+    function setPrice(uint256[] memory itemIds, uint256[] memory newPrices) external onlyOwner {
+        require(itemIds.length == newPrices.length, "setPrice: arrays length are not equal");
+
+        for (uint256 i = 0; i < itemIds.length; i++) {
+            prices[itemIds[i]] = newPrices[i];
+        }
     }
 
     function setQuantity(uint256[] memory _itemIds, uint256[] memory _newQuantities) external onlyOwner {
@@ -68,7 +71,7 @@ contract Store is Ownable {
         );
         require(num <= quantity[itemId], "buy: not enough quantity to buy");
 
-        token.safeTransferFrom(msg.sender, dev, price.mul(num));
+        token.safeTransferFrom(msg.sender, dev, prices[itemId].mul(num));
         quantity[itemId] = quantity[itemId] - num;
 
         for (uint256 i = 0; i < num; i++) {

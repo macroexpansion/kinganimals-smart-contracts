@@ -41,6 +41,10 @@ exports.formatTrx = (value) => {
     return TronWeb.fromSun(value).toNumber()
 }
 
+exports.parseTrxArray = (array) => {
+    return array.map(item => TronWeb.toSun(item))
+}
+
 exports.UserInfo = (items) => {
     if (items.length == 0) return []
 
