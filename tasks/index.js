@@ -62,8 +62,18 @@ const setPriceInStore = async () => {
     })
 }
 
+const setNftInStore = async () => {
+    const Store = await shasta().contract().at(storeAddress)
+
+    const set = await Store.setNFT(nftAddress).send({
+        feeLimit: tronWeb.toSun(2000), // 100 TRX
+        shouldPollResponse: false // wait for confirmation
+    })
+}
+
 !(async () => {
-    // await setMinter()
+    await setMinter()
     // await setItemQuantityInStore()
-    await setPriceInStore()
+    // await setPriceInStore()
+    // await setNftInStore()
 })()

@@ -31,8 +31,8 @@ describe('Store', () => {
 
         const tx = await this.Store.buy(
             /*number to buy=*/1,
-            /*uri=*/'https://static.howlcity.io/bike/11.json',
-            /*itemId=*/11
+            /*uri=*/'https://kinganimals.com/nft/json/1.json',
+            /*itemId=*/1
         ).send({
             feeLimit: tronWeb.toSun('200'),
             shouldPollResponse: false
@@ -49,7 +49,7 @@ describe('Store', () => {
         }
     }).timeout(20000)
 
-    it.skip('check nft', async () => {
+    it('check nft', async () => {
         const res = await this.UserInfo.getUserNft(this.UserInfo.tronWeb.defaultAddress.base58).call()
         console.log(UserInfo(res))
     }).timeout(20000)

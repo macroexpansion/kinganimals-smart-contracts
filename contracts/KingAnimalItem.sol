@@ -9,7 +9,7 @@ import '@openzeppelin/contracts/access/AccessControl.sol';
 import '@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol';
 import '@openzeppelin/contracts/utils/Counters.sol';
 
-contract NFT is
+contract KingAnimalItem is
     ERC721,
     ERC721Enumerable,
     ERC721URIStorage,
@@ -23,7 +23,7 @@ contract NFT is
     bytes32 public constant MINTER_ROLE = keccak256('MINTER_ROLE');
     Counters.Counter public _tokenIdCounter;
 
-    constructor() ERC721('KingAnimals', 'KING') {
+    constructor() ERC721('King Animal Item', 'KAI') {
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _setupRole(PAUSER_ROLE, msg.sender);
         _setupRole(MINTER_ROLE, msg.sender);
@@ -63,8 +63,7 @@ contract NFT is
         return super.tokenURI(tokenId);
     }
 
-    function supportsInterface(bytes4 interfaceId)
-        public
+    function supportsInterface(bytes4 interfaceId) public
         view
         override(ERC721, ERC721Enumerable, AccessControl)
         returns (bool)
