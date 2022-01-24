@@ -24,3 +24,13 @@ source .env_migrate && tronbox migrate --network mainnet
 ```
 yarn test test_manually/ten_file
 ```
+
+## Run tasks mainnet
+```
+node tasks/mainnet.js
+```
+
+## Run tasks testnet
+```
+node tasks/testnet.js
+```
