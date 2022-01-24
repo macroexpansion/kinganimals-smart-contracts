@@ -30,7 +30,7 @@ yarn test test_manually/ten_file
 node tasks/mainnet.js
 ```
 
-## Run tasks testnet
+## Run tasks shasta
 ```
-node tasks/testnet.js
+node tasks/shasta.js
 ```
