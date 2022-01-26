@@ -75,7 +75,7 @@ const setPriceInStore = async () => {
 }
 
 const setPriceInKaiStore = async () => {
-    const KaiStore = await shasta().contract().at(kaiStoreAddress)
+    const KaiStore = await mainnet().contract().at(kaiStoreAddress)
 
     const itemIds = Array.from(Array(21).keys()).slice(13, 21)
     const prices = parseTrxArray(Array(8).fill(2))
