@@ -2,7 +2,10 @@
     "testAddress": "TBNao4gymP5ot2Z3Hcn2LR4MBMqoapJPU2",
     "nftAddress": "TATAvBQfB2kWBpzzLyD6LyqMnNhgi9NngZ",
     "tokenAddress": "TXhsnHizBQMo6PUnKDhqYYc5q2uuwk2Nc6",
-    "userInfoAddress": "TSNJPHSjW5aiTWYjawQZhhMmPUx2qWfRv1",
+    "userInfoAddress": "TCEX8t5LAjM8L3o1tLqts5HztYoFSEgCKS",
     "marketAddress": "TM1xAByGBFH5Lv3tEyfjnSrwhXvR89XavJ",
-    "storeAddress": "TF9N7dvwpEzEgJJseGSsW7ZZgEGh54qZYz"
+    "storeAddress": "TF9N7dvwpEzEgJJseGSsW7ZZgEGh54qZYz",
+    "kaiAddress": "TGPwzNsKVouHHUnLGNRV6xgHkfoc5EQWGD",
+    "kaiStoreAddress": "TGW3tGnZbf3xjRKnBCbibZcZhSMmb4mgiU",
+    "kaiMarketAddress": "TVL9BNbvtbMjFJ6UdudyYSb4eW2pCU2odm"
 }

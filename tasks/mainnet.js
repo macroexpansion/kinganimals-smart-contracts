@@ -1,6 +1,6 @@
 const {mainnet, parseTrxArray} = require('../utils')
 const tronWeb = require('tronweb')
-const {nftAddress, storeAddress} = require('../mainnet_address.json')
+const {nftAddress, storeAddress, kaiAddress, kaiStoreAddress} = require('../mainnet_address.json')
 
 const minterBytes32 = '0x' + require('keccak256')('MINTER_ROLE').toString('hex')
 
@@ -12,6 +12,18 @@ const setMinter = async () => {
     const set = await NFT.grantRole(
         minterBytes32,
         address
+    ).send({
+        feeLimit: tronWeb.toSun(20), // 20 TRX
+        shouldPollResponse: false // wait for confirmation
+    })
+}
+
+const setKaiMinter = async () => {
+    const Kai = await mainnet().contract().at(kaiAddress)
+
+    const set = await Kai.grantRole(
+        minterBytes32,
+        kaiStoreAddress
     ).send({
         feeLimit: tronWeb.toSun(20), // 20 TRX
         shouldPollResponse: false // wait for confirmation
@@ -62,6 +74,21 @@ const setPriceInStore = async () => {
     })
 }
 
+const setPriceInKaiStore = async () => {
+    const KaiStore = await shasta().contract().at(kaiStoreAddress)
+
+    const itemIds = Array.from(Array(21).keys()).slice(13, 21)
+    const prices = parseTrxArray(Array(8).fill(2))
+
+    const set = await KaiStore.setPrice(
+        itemIds,
+        prices
+    ).send({
+        feeLimit: tronWeb.toSun(10000), // 100 TRX
+        shouldPollResponse: false // wait for confirmation
+    })
+}
+
 const setNftInStore = async () => {
     const Store = await mainnet().contract().at(storeAddress)
 
@@ -72,8 +99,10 @@ const setNftInStore = async () => {
 }
 
 !(async () => {
-    await setMinter()
+    // await setMinter()
     // await setItemQuantityInStore()
     // await setPriceInStore()
-    // await setNftInStore()
+
+    // await setKaiMinter()
+    // await setPriceInKaiStore()
 })()

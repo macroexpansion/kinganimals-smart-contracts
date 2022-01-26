@@ -4,5 +4,8 @@
     "tokenAddress": "TXhsnHizBQMo6PUnKDhqYYc5q2uuwk2Nc6",
     "userInfoAddress": "TSNJPHSjW5aiTWYjawQZhhMmPUx2qWfRv1",
     "marketAddress": "TM1xAByGBFH5Lv3tEyfjnSrwhXvR89XavJ",
-    "storeAddress": "TF9N7dvwpEzEgJJseGSsW7ZZgEGh54qZYz"
+    "storeAddress": "TF9N7dvwpEzEgJJseGSsW7ZZgEGh54qZYz",
+    "kaiAddress": "TF9N7dvwpEzEgJJseGSsW7ZZgEGh54qZYz",
+    "kaiStoreAddress": "TF9N7dvwpEzEgJJseGSsW7ZZgEGh54qZYz",
+    "kaiMarketAddress": "TF9N7dvwpEzEgJJseGSsW7ZZgEGh54qZYz"
 }
